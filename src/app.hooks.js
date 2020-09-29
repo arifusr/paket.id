@@ -13,7 +13,7 @@ module.exports = {
   },
 
   after: {
-    all: [deleteUnderscoreId()],
+    all: [],
     find: [],
     get: [],
     create: [],

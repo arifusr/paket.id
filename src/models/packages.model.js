@@ -14,9 +14,8 @@ module.exports = function (app) {
   const origin_data = new Schema(...origin_dataSchema)
   const koli = new Schema(...koliSchema)
   const schema = new Schema({
-    transaction_id: {type: String, required: true, set:()=>{
-        return uuidv4()
-      }, default:uuidv4 },
+    _id: {type: String
+    },
     customer_name: {
       type: String,
       required: true,
