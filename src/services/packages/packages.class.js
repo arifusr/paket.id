@@ -5,10 +5,7 @@ exports.Packages = class Packages extends Service {
   setup(app) {
     this.app = app;
   }
-  async find(id,params){
-      console.log("a")
-      return "a"
-  }
+  
   async create(data, params){
     //generate transaction id
     let transaction_id = uuidv4()
