@@ -2,19 +2,15 @@
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
+const { v4: uuidv4 } = require('uuid')
 module.exports = function (app) {
   const modelName = 'packages';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const schema = new Schema({
-    transaction_id: { type: String, 
-      validate: {
-        validator: function(v) {
-          return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
-        },
-        message: props => `${props.value} is not a valid uuid`
-      },
-      required: true },
+    transaction_id: {type: String, required: true, set:()=>{
+        return uuidv4()
+      }, default:uuidv4 },
     customer_name: {
       type: String,
       required: true,
@@ -143,7 +139,7 @@ module.exports = function (app) {
       },
       required: true }
   }, {
-    
+    idAttribute: "transaction_id",
     timestamps: {
       createdAt : "created_at",
       updatedAt : "updated_at"

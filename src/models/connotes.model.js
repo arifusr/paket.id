@@ -19,6 +19,11 @@ module.exports = function (app) {
         message: props => `${props.value} is not a valid uuid`
       },
       required: true },
+    connote_number:{
+      type: Number,
+      required: true,
+      max: 9999999
+    }
   }, {
     timestamps: true
   });
