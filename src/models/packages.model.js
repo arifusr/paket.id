@@ -145,6 +145,10 @@ module.exports = function (app) {
     origin_data:{
       type: origin_data,
       required: true
+    },
+    destination_data:{
+      type: origin_data,
+      required: true
     }
   }, {
     idAttribute: "transaction_id",
