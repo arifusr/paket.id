@@ -10,7 +10,8 @@ exports.Packages = class Packages extends Service {
     //generate transaction id
     let transaction_id = uuidv4()
     let connote = await this.app.service('connote').create({...data.connote, transaction_id})
-    let res = await super.create({...data, transaction_id, connote_id: connote.connote_id}, params)
+    const {connote: conn, ...data1 } = data
+    let res = await super.create({...data1, transaction_id, connote_id: connote.connote_id}, params)
     res.connote = connote
     return res
   }

@@ -2,11 +2,13 @@
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
-const { v4: uuidv4 } = require('uuid')
+const connoteSchema = require('../schema/connotes.schema')
+const { v4: uuidv4 } = require('uuid');
 module.exports = function (app) {
   const modelName = 'packages';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
+  const connote = new Schema(...connoteSchema)
   const schema = new Schema({
     transaction_id: {type: String, required: true, set:()=>{
         return uuidv4()
@@ -127,7 +129,7 @@ module.exports = function (app) {
       },
     },
     connote:{
-      type: Object,
+      type: connote,
       required: true
     },
     connote_id:{ type: String, 
