@@ -4,6 +4,7 @@
 // for more of what you can do here.
 const connoteSchema = require('../schema/connotes.schema')
 const origin_dataSchema = require('../schema/origin_data.schema')
+const koliSchema = require('../schema/koli.schema')
 const { v4: uuidv4 } = require('uuid');
 module.exports = function (app) {
   const modelName = 'packages';
@@ -11,6 +12,7 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const connote = new Schema(...connoteSchema)
   const origin_data = new Schema(...origin_dataSchema)
+  const koli = new Schema(...koliSchema)
   const schema = new Schema({
     transaction_id: {type: String, required: true, set:()=>{
         return uuidv4()
@@ -149,13 +151,53 @@ module.exports = function (app) {
     destination_data:{
       type: origin_data,
       required: true
+    },
+    koli_data:{
+      type:[{
+        type: koli
+      }],
+      required: true,
+      validate: {
+        validator: function(v) {
+          if(v.length < 1){
+            return false
+          }
+          return true
+        },
+        message: props => `${props.value} is not a valid koli data`
+      }
+    },
+    custom_field:{
+      type: Object,
+      default:{}
+    },
+    currentLocation:{
+      name:{
+        type:String,
+        required: true,
+        maxlength: 100
+      },
+      code:{
+        type:String,
+        maxlength: 10,
+        uppercase: true,
+        required: true
+      },
+      type:{
+        type: String,
+        required: true,
+        maxlength: 10
+
+      }
+      
     }
   }, {
     idAttribute: "transaction_id",
     timestamps: {
       createdAt : "created_at",
       updatedAt : "updated_at"
-    }
+    },
+    versionKey: false
   });
 
   // This is necessary to avoid model compilation errors in watch mode
