@@ -16,6 +16,8 @@ module.exports = function (app) {
   const schema = new Schema({
     _id: {type: String
     },
+    transaction_id: {type: String
+    },
     customer_name: {
       type: String,
       required: true,
