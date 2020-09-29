@@ -171,10 +171,7 @@ module.exports = [{
         max: 999999
     },
     history:[
-        {location:{
-            type:String,
-            default:"a"
-        }}
+        Schema.Types.Mixed
     ]
   }, {
     _id : false,
