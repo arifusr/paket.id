@@ -128,6 +128,10 @@ module.exports = function (app) {
       connote_id:{
         type:  Schema.Types.ObjectId,
         ref: 'Connote'
+      },
+      connote:{
+        type: Object,
+        required: true
       }
     }
   }, {
