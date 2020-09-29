@@ -101,6 +101,34 @@ module.exports = function (app) {
       minlength: 3,
       maxlength: 10,
       required: true,
+    },
+    transaction_cash_amount:{
+      type: Number,
+      max:9999999,
+      default:0
+    },
+    transaction_cash_change:{
+      type: Number,
+      max:9999999,
+      default:0
+    },
+    customer_attribute:{
+      Nama_Sales:{
+        type: String,
+        minlength: 3,
+        maxlength: 25,
+        required: true
+      },
+      TOP:{
+        type: String
+      },
+      Jenis_Pelanggan:{
+        type: String,
+      },
+      connote_id:{
+        type:  Schema.Types.ObjectId,
+        ref: 'Connote'
+      }
     }
   }, {
     timestamps: {
