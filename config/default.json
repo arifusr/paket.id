@@ -6,5 +6,5 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/paket_id"
+  "mongodb": "mongodb://arifusr:arifusr@cluster0-shard-00-01.hkzml.gcp.mongodb.net/admin?ssl=true"
 }
