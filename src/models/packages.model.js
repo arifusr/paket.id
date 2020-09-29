@@ -3,12 +3,14 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 const connoteSchema = require('../schema/connotes.schema')
+const origin_dataSchema = require('../schema/origin_data.schema')
 const { v4: uuidv4 } = require('uuid');
 module.exports = function (app) {
   const modelName = 'packages';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const connote = new Schema(...connoteSchema)
+  const origin_data = new Schema(...origin_dataSchema)
   const schema = new Schema({
     transaction_id: {type: String, required: true, set:()=>{
         return uuidv4()
@@ -139,7 +141,11 @@ module.exports = function (app) {
         },
         message: props => `${props.value} is not a valid uuid`
       },
-      required: true }
+      required: true },
+    origin_data:{
+      type: origin_data,
+      required: true
+    }
   }, {
     idAttribute: "transaction_id",
     timestamps: {
