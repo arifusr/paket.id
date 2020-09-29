@@ -1,5 +1,4 @@
-const deleteUnderscoreId = require('./hooks/delete-underscore-id');
-// Application hooks that run for every service
+
 
 module.exports = {
   before: {
@@ -13,7 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [deleteUnderscoreId()],
+    all: [],
     find: [],
     get: [],
     create: [],

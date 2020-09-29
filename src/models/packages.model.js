@@ -127,14 +127,23 @@ module.exports = function (app) {
       },
       connote_id:{
         type:  Schema.Types.ObjectId,
-        ref: 'Connote'
+        ref: 'connotes'
       },
-      connote:{
-        type: Object,
-        required: true
-      }
-    }
+    },
+    connote:{
+      type: Object,
+      required: true
+    },
+    connote_id:{ type: String, 
+      validate: {
+        validator: function(v) {
+          return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
+        },
+        message: props => `${props.value} is not a valid uuid`
+      },
+      required: true }
   }, {
+    
     timestamps: {
       createdAt : "created_at",
       updatedAt : "updated_at"
